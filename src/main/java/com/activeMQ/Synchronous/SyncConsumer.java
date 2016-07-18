@@ -38,8 +38,9 @@ public class SyncConsumer {
 		destination = session.createQueue("MYQUEUE");
 		
 		consumer = session.createConsumer(destination);
+		
+		//in synchronous way , consumer consumes as soon as message is sent by the producer
 		msg = (TextMessage) consumer.receive();
-		System.out.println(msg);
 		
 		if(msg != null && msg instanceof TextMessage){
 			

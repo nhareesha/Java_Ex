@@ -17,9 +17,12 @@ public class Producer {
 	private ConnectionFactory factory;
 	private Connection conn;
 	private Session session;
-	private TextMessage msg;
-	private Destination destination;
-	private MessageProducer producer;
+	private TextMessage msg1;
+	private TextMessage msg2;
+	private Destination destination1;
+	private Destination destination2;
+	private MessageProducer producer1; //sync
+	private MessageProducer producer2;//Async
 	
 	public Producer() {
 		
@@ -40,18 +43,56 @@ public class Producer {
 			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			
 			//creating a Destination of type Queue
-			destination = session.createQueue("MYQUEUE");
-			producer = session.createProducer(destination);
+			destination1 = session.createQueue("MYQ1");
+			producer1 = session.createProducer(destination1);
 			
 			//creating Message instance
-			msg = session.createTextMessage();
-			msg.setText("This is the First Message on ActiveMQ JMS provider");
+			msg1 = session.createTextMessage();
+			msg1.setText("This is the First Message on ActiveMQ JMS provider");
 			
-			//sending message
-			producer.send(msg);
+			//sending message to sync consumer
+			producer1.send(msg1);
 			
 			//closing producer connection stream
-			producer.close();			
+			producer1.close();			
+		}catch(JMSException ex){
+			ex.printStackTrace();	
+		}
+		finally{
+			if(conn != null){
+				conn = null;
+			}
+		}
+	
+	}
+	
+	public void sendMessageToAsynConsumer(){
+		try {
+			
+			//Creating ConnectionFactory instance
+			factory = new ActiveMQConnectionFactory(ActiveMQConnection.DEFAULT_BROKER_URL);
+			
+			//creating connection
+			conn = factory.createConnection();
+			
+			//starting connection
+			conn.start();
+			
+			//creating session
+			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			
+			//creating a Destination of type Queue
+			destination2 = session.createQueue("AyncQueue");
+			producer2 = session.createProducer(destination2);
+			
+			//creating message instance
+			msg2 = session.createTextMessage();
+			msg2.setText("This a message to async consumer");
+			
+			//sending to async consumer
+			producer2.send(msg2);
+			
+			producer2.close();			
 		}catch(JMSException ex){
 			ex.printStackTrace();	
 		}

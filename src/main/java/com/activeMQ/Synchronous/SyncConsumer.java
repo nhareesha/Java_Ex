@@ -35,7 +35,7 @@ public class SyncConsumer {
 		
 		session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE );
 		
-		destination = session.createQueue("MYQUEUE");
+		destination = session.createQueue("MYQ1");
 		
 		consumer = session.createConsumer(destination);
 		
@@ -61,9 +61,9 @@ public class SyncConsumer {
 		
 	}
 	
-	public static void main(String args[]){
+/*	public static void main(String args[]){
 		SyncConsumer consumer = new SyncConsumer();
 		consumer.receiveSynchronousMessage();
 	}
-
+*/
 }

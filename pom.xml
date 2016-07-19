@@ -15,6 +15,7 @@
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-core -->
+    <!-- activemq dependency -->
 	<dependency>
 	    <groupId>org.apache.activemq</groupId>
 	    <artifactId>activemq-core</artifactId>
@@ -25,6 +26,29 @@
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>javax.servlet-api</artifactId>
 	    <version>3.1.0</version>
+	</dependency>
+	
+	<!-- For Spring based JMS application Spring and JMS integration dependencies -->
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jms</artifactId>
+	    <version>4.3.1.RELEASE</version>
+	</dependency>
+	
+	<!-- Spring core dependencies-->
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>4.3.1.RELEASE</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>4.3.1.RELEASE</version>
 	</dependency>
     
   </dependencies>

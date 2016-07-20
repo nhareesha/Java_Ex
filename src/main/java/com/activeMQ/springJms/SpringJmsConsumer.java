@@ -33,8 +33,7 @@ public class SpringJmsConsumer {
 				System.out.println("Messages received from Consumer : "+((TextMessage)msg).getText());
 				
 			}else{
-				System.out.println();
-				
+				System.out.println("Message received is not of type text");		
 			}
 		}catch(Exception e){
 			e.printStackTrace();

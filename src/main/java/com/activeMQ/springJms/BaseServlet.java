@@ -19,14 +19,14 @@ public class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ApplicationContext appCtx = null;
 	private SpringJmsProducer producer = null;
+	private SpringJmsConsumer consumer= null;
 	private BrokerService broker = null;
 	
 	
 	public void init() throws ServletException{
 		try{
 			System.out.println("Inside init");
-			//appCtx = new ClassPathXmlApplicationContext("/WEB-INF/spring-jms.xml");
-			
+			//WebapplicationContext
 			appCtx = WebApplicationContextUtils
 				        .getRequiredWebApplicationContext(getServletContext());
 			BrokerService broker = BrokerFactory.createBroker(new URI("broker:(tcp://localhost:61616)"));
@@ -44,10 +44,16 @@ public class BaseServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException,IOException{
 		System.out.println("Inside service");
+		
+		//Producer
 		producer = (SpringJmsProducer) appCtx.getBean("springJmsProducer", SpringJmsProducer.class);
 		String msg = "This is from Spring JMS producer";
 		producer.sendMessage(msg);
 		System.out.println("Message sent check ActiveMQ queue");
+		
+		//Consumer
+		consumer = (SpringJmsConsumer)appCtx.getBean("springJmsConsumer", SpringJmsConsumer.class);
+		consumer.receiveMsg();
 		System.out.println("end of service");
 	}
 	

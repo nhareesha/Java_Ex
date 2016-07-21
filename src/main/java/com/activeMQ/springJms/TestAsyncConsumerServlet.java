@@ -23,14 +23,13 @@ public class TestAsyncConsumerServlet extends HttpServlet{
 	
 	public void init() throws ServletException{
 		appCtx = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-		
 	}
 
 	public void doGet() throws ServletException,IOException{
 		System.out.println("Inside service -Async");
 		try{
 			
-			broker = BrokerFactory.createBroker(new URI("broker:(tcp://localhost:61616)"));
+			broker = BrokerFactory.createBroker(new URI("broker:(tcp://0.0.0.0:61616)"));
 	        broker.start();
 	        producer = (SpringJmsProducer)appCtx.getBean("springJmsProducer",SpringJmsProducer.class);
 	        producer.sendMessage("Message to async consumer implemented using spring framework");

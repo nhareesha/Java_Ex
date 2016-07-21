@@ -16,11 +16,6 @@ xmlns:p="http://www.springframework.org/schema/p"
     	<property name="brokerURL" value="tcp://0.0.0.0:61616"/>
     </bean>
     
-<!--     Caching Connection factory
-  <bean id="cachingFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
-    <property name="targetConnectionFactory" ref="connFactory" />
-  </bean> -->
-    
     <!-- Configuring destination -->
     <bean id="queueDest" class="org.apache.activemq.command.ActiveMQQueue">
     	<constructor-arg value="springJMSQueue"/>
@@ -33,11 +28,12 @@ xmlns:p="http://www.springframework.org/schema/p"
     </bean>
     
     <!-- Configuring Producer -->
-    <bean id="springJmsProducer" class="com.activeMQ.springJms.SpringJmsProducer">
+       <bean id="springJmsProducer" class="com.activeMQ.springJms.SpringJmsProducer">
     	<property name="jmsTemplate" ref="jmsTemplate"/>
     	<property name="destination" ref="queueDest"/>
     </bean>
     
+ 
     <!-- Configuring Consumer -->
     
     <bean id="springJmsConsumer" class="com.activeMQ.springJms.SpringJmsConsumer">
@@ -53,7 +49,7 @@ xmlns:p="http://www.springframework.org/schema/p"
    <!-- MessageListenerContainer -->
     <bean id="messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
     	<property name="connectionFactory" ref= "connFactory"/>
-    	<property name="destinationName" value="springJMSQueue"/>
+    	<property name="destination" ref="queueDest"/>
     	<property name="messageListener" ref="listener"/>
     </bean>
     

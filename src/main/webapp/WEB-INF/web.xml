@@ -27,4 +27,14 @@
 	<url-pattern>/test</url-pattern>  
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>TestAsyncConsumerServlet</servlet-name>
+  	<servlet-class>com.activeMQ.springJms.TestAsyncConsumerServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>TestAsyncConsumerServlet</servlet-name>
+  	<url-pattern>/asyncTest</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

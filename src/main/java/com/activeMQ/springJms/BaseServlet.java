@@ -48,7 +48,7 @@ public class BaseServlet extends HttpServlet {
 		try{
 			//to escape the JVM_Bind exception , instantiating the broker 
 			//object inside service method..Here broker is instantiated for each and every request
-			broker = BrokerFactory.createBroker(new URI("broker:(tcp://localhost:61616)"));
+			broker = BrokerFactory.createBroker(new URI("broker:(tcp://0.0.0.0:61616)"));
 	        broker.start();
 			
 			//Producer
